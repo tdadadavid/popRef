@@ -1,5 +1,5 @@
-import { HttpStatus } from "src/core";
-import { UserRoles } from "../../../users/model";
+import { HttpStatus } from "../../../core";
+import { UserRoles } from "../../../users";
 
 
 export class ViewRoles {
