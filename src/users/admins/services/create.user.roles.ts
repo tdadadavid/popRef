@@ -1,25 +1,20 @@
 import { ControllerArgs, HttpStatus } from "src/core";
-import { UserRoles } from "../../../users";
+import { UserRoles } from "../..";
 
 
-export class FindRoles {
+export class CreateRole {
     constructor(private readonly dbUserRoles: typeof UserRoles){}
 
-    //@ts-nocheck
-    // find = async () => {
+    create = async ({ input }: ControllerArgs) => {
 
-    //     const userRoles = await this.dbUserRoles.findAll();
+        const userRoles = await this.dbUserRoles.create({
+            name: input.name,
+        });
 
-    //     return {
-    //         code: HttpStatus.CREATED,
-    //         message: "All roles",
-    //         data: userRoles.map((role: UserRoles) => {
-    //             return {
-    //                 id: role.role_id,
-    //                 name: role.name,
-    //                 createdAt: role.created_at,
-    //             }
-    //         })
-    //     }
-    // }
+        return {
+            code: HttpStatus.CREATED,
+            message: "Role created",
+            data: userRoles,
+        }
+    }
 }

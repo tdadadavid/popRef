@@ -14,7 +14,7 @@ export class DecideOnProposal {
         private readonly dbProjectStatus: typeof ProjectApprovalStatus
     ){}
 
-    accept = async ({input}: ControllerArgs) => {
+    make = async ({input}: ControllerArgs) => {
         const { projectId, accept } = input;
 
         const project = await this.dbProject.findByPk(projectId);
