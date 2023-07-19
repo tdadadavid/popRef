@@ -15,6 +15,6 @@ export const register = {
   ],
   "new:contribution": sendNewContributionNotification.handle,
   "new:artist:project:proposal": sendNewProjectProposalNotification.handle,
-  "project:proposal:accepted": sendProjectAcceptedNotification.handle,
+  "project:proposal:decision": sendProjectAcceptedNotification.handle,
   "event:registeration:succesful": () => logger.info("Events listeners registered"),
 }; 
