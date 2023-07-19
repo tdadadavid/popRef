@@ -32,13 +32,12 @@ export class SeeProjects {
 
         console.log(acceptedProposalsAndCount);
 
-        //@ts-ignore
         const totalCount = acceptedProposalsAndCount.count;
       
           // Calculate the total number of pages based on the total count and limit.
-          const totalPages = Math.ceil(totalCount / limit);
+        const totalPages = Math.ceil(totalCount / limit);
       
-          return {
+        return {
             code: HttpStatus.OK,
             message: 'All projects(tokens)',
             data: {
@@ -49,6 +48,6 @@ export class SeeProjects {
                 totalCount,
                 totalPages,
             }
-          };
+        };
     }
 }
