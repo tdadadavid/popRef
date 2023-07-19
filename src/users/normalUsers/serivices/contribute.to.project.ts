@@ -38,7 +38,7 @@ export class MakeContribution {
                 percentage_contribution: percentageContribution,
                 transaction_type: TransactionType.BUY,
                 made_by: user.id,
-                transaction_reference: `POPREV-${randomBytes(10).toString('hex')}-${project.project_id}`
+                transaction_reference: `POPREV-${randomBytes(10).toString('hex')}.BUY.-${project.project_id}`
             });
 
             logger.info("Updating project contribution");
