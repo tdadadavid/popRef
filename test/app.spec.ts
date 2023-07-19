@@ -5,7 +5,11 @@ import { app } from "../src/app"
 
 describe('App Health', () => {
 
-    const server = createServer(app);
+
+    let server;
+    beforeAll(() => {
+        server = createServer(app);
+    })
 
 
     it('should return 200 Ok response when the /health endpoint is down', async () => {
