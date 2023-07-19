@@ -1,3 +1,7 @@
-export * from "./contribute.to.project";
-export * from "./sell.token.in.a.project";
-export * from "./view.user.projects";
+import { ProjectContributions, ProjectTransactions, Projects } from "../../../projects";
+import { User, UserRoles } from "../../../users/model";
+import { MakeContribution } from "./contribute.to.project";
+import { ViewRoles } from "./see.all.roles";
+
+export const makeContribution = new MakeContribution(User, Projects, ProjectContributions, ProjectTransactions);
+export const viewRoles = new ViewRoles(UserRoles);
