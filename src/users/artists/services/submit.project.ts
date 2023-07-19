@@ -1,10 +1,10 @@
 import { log } from "console";
 import moment from "moment";
 
-import { dispatch } from "src/app";
-import { ConflictError, ControllerArgs, HttpStatus, NewProjectProposal, logger } from "src/core";
-import { DefaultApprovalStatus, ProjectApprovalStatus, Projects } from "src/projects";
-import { DefaultUserRoles, User, UserRoles } from "src/users";
+import { dispatch } from "../../../app";
+import { ConflictError, ControllerArgs, HttpStatus, NewProjectProposal, logger } from "../../../core";
+import { DefaultApprovalStatus, ProjectApprovalStatus, Projects } from "../../../projects";
+import { DefaultUserRoles, User, UserRoles } from "../../../users";
 
 
 
@@ -64,10 +64,10 @@ export class SubmitProposal {
 
         const notificationOptions: NewProjectProposal = {
             email: "davidtofunmidada@gmail.com", //TODO:
-            artist: `${artist.firstName} ${artist.lastName} ${artist.lastName}`,
+            artist: `${artist.firstname} ${artist.lastname} ${artist.othername}`,
             project: newProposal.name,
             estimatedCost: newProposal.estimated_amount.toString(),
-            date: moment(newProposal.created_at).toISOString(),
+            date: newProposal.created_at.toDateString(),
         }
         dispatch("new:artist:project:proposal", notificationOptions);
         logger.info("Admins notification sent");
