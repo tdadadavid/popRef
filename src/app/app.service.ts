@@ -5,9 +5,8 @@ import * as morgan from "morgan";
 import * as compression from "compression";
 
 
-import { corsOptions, notFoundErrorHandler, errorHanlder, globalRateLimiter  } from "../core";
+import { corsOptions, notFoundHandler, errorHandler, globalRateLimiter  } from "../core";
 import { appRouter } from "./app.router";
-import { currentUser } from "../auth";
 
 export const app = express();
 
@@ -17,7 +16,6 @@ app.use(morgan('dev'));
 app.use(compression());
 app.use(globalRateLimiter)
 app.use(cors(corsOptions));
-app.use(currentUser.handle);
 app.use("/api/v1", appRouter);
-app.use(notFoundErrorHandler.handle);
-app.use(errorHanlder.handle);
+app.use(notFoundHandler.handle);
+app.use(errorHandler.handle);
