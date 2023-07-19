@@ -22,6 +22,10 @@ module.exports = {
         type: Sequelize.STRING,  
         allowNull: false,
       },
+      password: {
+        type: Sequelize.STRING,  
+        allowNull: false,
+      },
       email: {
         type: Sequelize.STRING,  
         allowNull: false,
@@ -34,12 +38,12 @@ module.exports = {
           key: 'role_id',
         }
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.DATE,
         allowNull: false,

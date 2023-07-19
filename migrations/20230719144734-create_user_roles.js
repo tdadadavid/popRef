@@ -14,12 +14,12 @@ module.exports = {
         type: Sequelize.STRING, 
         unique: true,
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.DATE,
         allowNull: false,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.DATE,
         allowNull: false,
