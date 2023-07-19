@@ -1,7 +1,7 @@
 import { ProjectContributions, ProjectTransactions, Projects } from "../../../projects";
 import { User, UserProjects, UserRoles } from "../../../users/model";
 import { MakeContribution } from "./contribute.to.project";
-import { SeeTransactions } from "./see.all.contributions";
+import { SeeTransactions } from "./see.user.transaction.for.token";
 import { ViewRoles } from "./see.all.roles";
 import { SellTokens } from "./sell.token.in.a.project";
 
