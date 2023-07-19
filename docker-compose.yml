@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   api:
     build:
@@ -7,24 +7,24 @@ services:
     container_name: "popRefAPI"
     environment:
       DATABASE_USER: postgres
-      DATABASE_PASSWORD: rootpassword
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_NAME: poprev
       DATABASE_HOST: 127.0.0.1
       DATABASE_PORT: 5432
-      ACCESS_TOKEN_SECRET: ''
-      ACCESS_TOKEN_SECRET_LIFE_SPAN: 100
-      REFRESH_TOKEN_SECRET: ''
-      REFRESH_TOKEN_SECRET_LIFE_SPAN: 1000
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      ACCESS_TOKEN_SECRET_LIFE_SPAN: ${ACCESS_TOKEN_SECRET_LIFE_SPAN}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}1000
+      REFRESH_TOKEN_SECRET_LIFE_SPAN: ${REFRESH_TOKEN_SECRET_LIFE_SPAN}
     ports:
       - "4000:4000"
     restart: "always"
     volumes:
-      - 'appCache/app:node_modules'
+      - appCache/app:node_modules
     depends_on:
       - db
       - cache
-  
-  db: 
+
+  db:
     image: postgres
     container_name: pop_rev_db
     restart: always
@@ -35,8 +35,8 @@ services:
       POSTGRES_USER: "postgres"
     volumes:
       - pgdata:/var/lib/postgresql/data
-  
-  cache: 
+
+  cache:
     image: redis:6.2-alpine
     container_name: pop_rev_cache
     restart: always
@@ -44,8 +44,9 @@ services:
       - "6379:6379"
     volumes:
       - cache:/data
-  
+
 volumes:
+  appCache:
   cache:
     driver: local
   pgdata:
