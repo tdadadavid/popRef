@@ -1,6 +1,6 @@
 import { IncomingHttpHeaders } from 'http';
 import "express"
-import { Schema } from 'zod';
+import { SomeZodObject } from 'zod';
 
 export interface ControllerArgs {
     input?: any;
@@ -12,9 +12,9 @@ export interface ControllerArgs {
 }
 
 export interface ValidationSchema {
-  inputSchema?: Schema;
-  paramsSchema?: Schema;
-  querySchema?: Schema;
+  inputSchema?: SomeZodObject;
+  paramsSchema?: SomeZodObject;
+  querySchema?: SomeZodObject;
 }
 
 export interface TokenUser {

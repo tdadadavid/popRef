@@ -1,11 +1,11 @@
 import { Response, Request, NextFunction } from "express";
+
 import { HttpStatus, zodValidate, parseControllerArgs } from "../utils";
 import { AnyFunction, ExpressCallbackFunction, ValidationSchema } from "../types";
 import { UnProcessableError } from "../errors";
-import { SomeZodObject, z } from "zod";
 
 
-class ControllerHandler {
+export class ControllerHandler {
 
     handle = (controllerFn: AnyFunction, schema: ValidationSchema | undefined = {}): ExpressCallbackFunction => {
         return async (req: Request, res: Response, next: NextFunction) => {
@@ -47,4 +47,3 @@ class ControllerHandler {
 
 }
 
-export default new ControllerHandler;

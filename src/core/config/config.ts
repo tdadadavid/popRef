@@ -16,10 +16,10 @@ export const config = Object.freeze({
         smtpRefreshToken: process.env.REFRESH_TOKEN as string,
     },
     auth: {
-        accessTokenSecret: process.env.ACCESS_TOKEN as string,
-        accessTokenExpiresIn: process.env.ACCESS_TOKEN_SECRET as string,
-        refreshTokenSecret: process.env.REFRESH_TOKEN as string,
-        refreshTokenExpiresIn: process.env.REFRESH_TOKEN_SECRET as string,
+        accessTokenSecret: process.env.ACCESS_TOKEN_SECRET as string,
+        accessTokenExpiresIn: process.env.ACCESS_TOKEN_SECRET_LIFE_SPAN as string,
+        refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET as string,
+        refreshTokenExpiresIn: process.env.ACCESS_TOKEN_SECRET_LIFE_SPAN as string,
     },
     db: {
         dbUser: process.env.DATABASE_USER as string ,

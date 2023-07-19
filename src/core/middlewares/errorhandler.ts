@@ -3,7 +3,7 @@ import { ApiError } from "../errors";
 import {logger} from "../logging";
 import { HttpStatus } from "../utils";
 
-class ErrorHandler  {
+export class ErrorHandler  {
 
     handle = async (error: Error, _: Request, res: Response, __: NextFunction) => {
         let statusCode: number = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -20,5 +20,3 @@ class ErrorHandler  {
     }
     
 }
-
-export default new ErrorHandler;

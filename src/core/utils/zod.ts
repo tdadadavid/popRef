@@ -1,8 +1,10 @@
-import { Schema } from 'zod';
+import { SomeZodObject } from 'zod';
 import { BadRequestError } from '../errors';
 
-export const zodValidate = (schema: Schema, obj: any) => {
+export const zodValidate = (schema: SomeZodObject, obj: any) => {
     const result = schema.safeParse(obj);
-    if (!result.success) throw new BadRequestError("Validation failed");
+    if (!result.success) {
+        throw new BadRequestError("Validation error");
+    }
     return result.data;
 }
