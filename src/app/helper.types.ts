@@ -1,4 +1,4 @@
-import { ExtractParams } from "src/core";
+import { ExtractParams } from "../core";
 import { register } from "./event.listener.register";
 
 /**

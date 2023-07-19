@@ -7,7 +7,7 @@ import { userRolesRouter } from "./user.roles.router";
 import { currentUser } from "../../../auth/services/current.user";
 import { artistRouter } from "../../artists";
 import {adminRouter} from "../../admins";
-import { isAdmin, isArtist } from "src/users/middlewares";
+import { isAdmin, isArtist } from "../../middlewares";
 
 export const userRouter = Router();
 

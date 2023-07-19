@@ -19,5 +19,5 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["tests", "src", "node_modules/types"]
+  "include": ["migrations","tests", "src", "node_modules/types"]
 }

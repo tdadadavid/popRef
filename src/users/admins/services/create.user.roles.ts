@@ -1,4 +1,4 @@
-import { ControllerArgs, HttpStatus } from "src/core";
+import { ControllerArgs, HttpStatus } from "../../../core";
 import { UserRoles } from "../..";
 
 

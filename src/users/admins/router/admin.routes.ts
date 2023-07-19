@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { controllerHandler } from "src/core";
+import { controllerHandler } from "../../../core";
 import { createRole, decideOnProposal, seeProjectProposals } from "../services";
 
 export const adminRouter = Router();
