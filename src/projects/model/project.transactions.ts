@@ -19,8 +19,8 @@ export class ProjectTransactions extends Model<
     declare project_id: CreationOptional<string>;
     declare transaction_reference: string;
     declare amount: number;
-    declare percentage_contribution: number;
-    declare current_cutribution: number;
+    declare percentage_contribution: CreationOptional<number>;
+    declare current_cutribution: CreationOptional<number>;
     declare transaction_type: string;
     declare made_by: CreationOptional<string>;
     declare created_at: CreationOptional<Date | null>;

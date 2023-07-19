@@ -6,3 +6,5 @@ export const projectRouter = Router();
 
 projectRouter
     .get('/', controllerHandler.handle(seeProjects.see))
+    .get('/:project_id/transactions', controllerHandler.handle(()=>{}))
+    .get('/:project_id/contributions', controllerHandler.handle(()=>{}))
