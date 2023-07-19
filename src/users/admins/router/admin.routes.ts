@@ -4,7 +4,7 @@ import { controllerHandler } from "src/core";
 import { isAdmin } from "src/users/middlewares";
 import { createRole, decideOnProposal, seeProjectProposals } from "../services";
 
-const adminRouter = Router();
+export const adminRouter = Router();
 
 
 adminRouter

@@ -9,3 +9,10 @@ export const makeContributionSchema: ValidationSchema = {
     })
 }
 
+
+export const sellTokenSchema: ValidationSchema = {
+    inputSchema: z.object({
+        tokenId: z.string().uuid(),
+        amount: z.string().min(0),
+    })
+}
