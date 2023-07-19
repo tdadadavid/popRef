@@ -3,11 +3,10 @@ import { Op } from "sequelize";
 import { logger, sequelize } from "../../core";
 import { DefaultApprovalStatus, ProjectApprovalStatus } from "../../projects";
 
-
 class RegisterDefaultApprovalStatus {
 
     handle = async () => {
-        
+
         const theyHaveBeenRegistered = await ProjectApprovalStatus.findAll({
             where: {
                 [Op.or]: [
