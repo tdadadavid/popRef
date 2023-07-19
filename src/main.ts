@@ -6,11 +6,11 @@ initializeDbConnection()
     .catch(gracefullyShutdown);
 
 process.on('uncaughtException', (error: unknown) => {
-    logger.debug("Uncaught exception", error);
+    logger.info("Uncaught exception", error);
     process.exit(1);
 })
 
 process.on('unhandledRejection', (error: unknown) => {
-    logger.debug("Uncaught exception", error);
+    logger.info("Uncaught exception", error);
     process.exit(1);
 })
