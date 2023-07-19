@@ -1,13 +1,13 @@
 import { Response, Request, NextFunction } from "express";
 import { HttpStatus, zodValidate, parseControllerArgs } from "../utils";
-import { AnyFunction, ExpressCallbackFunction, TypedFunction, ValidationSchema } from "../types";
+import { AnyFunction, ExpressCallbackFunction, ValidationSchema } from "../types";
 import { UnProcessableError } from "../errors";
 import { SomeZodObject, z } from "zod";
 
 
 class ControllerHandler {
 
-    handle = (controllerFn: TypedFunction, schema: ValidationSchema | undefined = {}): ExpressCallbackFunction => {
+    handle = (controllerFn: AnyFunction, schema: ValidationSchema | undefined = {}): ExpressCallbackFunction => {
         return async (req: Request, res: Response, next: NextFunction) => {
             const controllerArgs = parseControllerArgs.parse(req);
             const { input, params, query } = controllerArgs;

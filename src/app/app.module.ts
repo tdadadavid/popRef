@@ -1,11 +1,10 @@
 import { createServer } from "http";
 
-import {config, logger} from "../core";
+import {config} from "../core";
 import { app } from "./app.service";
+import { dispatch } from "./app.events";
 
 export const startApp = async () => {
     const server = createServer(app);
-    server.listen(config.port, () => {
-        logger.info(`Server listening on ${config.port}.`);
-    });
+    server.listen(config.port, () => dispatch("app:up"));
 }

@@ -1,23 +1,21 @@
-import express from "express";
-import cors from "cors";
+import * as express from "express";
+import * as cors from "cors";
 import helmet from "helmet";
-import morgan from "morgan";
-import compression from "compression";
-import rateLimit from "express-rate-limit";
+import * as morgan from "morgan";
+import * as compression from "compression";
 
 
-import { corsOptions, notFoundErrorHandler, errorHanlder, rateLimitOptions  } from "../core";
+import { corsOptions, notFoundErrorHandler, errorHanlder, globalRateLimiter  } from "../core";
 import { appRouter } from "./app.router";
 import { currentUser } from "../auth";
-
 
 export const app = express();
 
 app.use(express.json());
 app.use(helmet());
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 app.use(compression());
-app.use(rateLimit(rateLimitOptions))
+app.use(globalRateLimiter)
 app.use(cors(corsOptions));
 app.use(currentUser.handle);
 app.use("/api/v1", appRouter);

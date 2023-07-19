@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyToken,config,ForbiddenError,TokenUser } from "../../core";
 
-class CurrentUser {
+import { verifyToken,config,ForbiddenError,TokenUser, UnAuthorizedError } from "../../core";
+
+export class CurrentUser {
 
     handle = async (req: Request, res: Response, next: NextFunction) => {
         const tokenHeader = req.get('Authorization') || req.get('x-Auth-Token');
  
         if (!tokenHeader) {
-            req.user = null;
-            return next();
+            throw new UnAuthorizedError("unathorized");
         }
         const token = tokenHeader.split(' ').pop() as string;
         let tokenDetails;
@@ -25,5 +25,3 @@ class CurrentUser {
         next();
     }
 }
-
-export const currentUser = new CurrentUser();

@@ -1,4 +1,5 @@
 import { Dialect, Sequelize } from 'sequelize';
+
 import { config } from './config';
 
 // Postgres implementation
@@ -14,5 +15,9 @@ export const sequelize = new Sequelize(
         },
         host: config.db.dbHost,
         dialect: 'postgres' as Dialect,
-    }
+        define: {
+            timestamps: true,
+            underscored: true,
+        }
+    },
 );
