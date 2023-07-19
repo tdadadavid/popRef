@@ -12,21 +12,19 @@ import { sequelize } from '../../core';
 import { UserRoles } from './user.roles';
 
 export class User extends Model<
-    InferAttributes<User>, InferCreationAttributes<User>>{
+    InferAttributes<User>, InferCreationAttributes<User>
+>{
     declare id: CreationOptional<string>;
-    declare firstName: string;
-    declare lastName: string;
-    declare otherName: CreationOptional<string | null>;
+    declare firstname: string;
+    declare lastname: string;
+    declare othername: CreationOptional<string | null>;
     declare email: string;
     declare role: ForeignKey<string>
-    declare password?: CreationOptional<string | null>;
-    declare verifyToken: CreationOptional<string | null>;
-    declare verifyTokenExpiresIn: CreationOptional<Date | null>;
-    declare isVerified: CreationOptional<boolean>;
+    declare password?: CreationOptional<string>;
     declare createdAt?: CreationOptional<Date>;
-    declare updatedAt?: CreationOptional<Date>;
+    declare deleted?: CreationOptional<Date>;
 
-    fullName = () => `${this.firstName} ${this.lastName} ${this.otherName.charAt(0).toUpperCase()}`;
+    fullName = () => `${this.firstname} ${this.lastname} ${this.othername.charAt(0).toUpperCase()}`;
 }
 
 User.init(
@@ -37,15 +35,15 @@ User.init(
             allowNull: false,
             primaryKey: true
         },
-        firstName: {
+        firstname: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        lastName: {
+        lastname: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        otherName: {
+        othername: {
             type: DataTypes.STRING,
             allowNull: true,
         },
@@ -56,13 +54,7 @@ User.init(
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: true,
-        },
-        verifyToken: DataTypes.STRING,
-        verifyTokenExpiresIn: DataTypes.DATE,
-        isVerified: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
+            allowNull: false,
         },
         role: {
             type: DataTypes.UUID,
@@ -73,7 +65,30 @@ User.init(
         }
     },
     {
-        modelName: 'user',
+        defaultScope: {
+            attributes: {
+                exclude: [
+                    'password',
+                    'verifyToken',
+                    'verifyTokenExpiresIn',
+                    'resetToken',
+                    'resetTokenExpiresIn'
+                ]
+            }
+        },
+        scopes: {
+            withPassword: {
+                attributes: {
+                    exclude: [
+                        'verifyToken',
+                        'verifyTokenExpiresIn',
+                        'resetToken',
+                        'resetTokenExpiresIn'
+                    ]
+                }
+            },
+        },
+        modelName: 'users',
         sequelize,
         timestamps: true,
     },

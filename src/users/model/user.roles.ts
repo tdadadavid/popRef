@@ -1,6 +1,5 @@
 
 import * as moment from "moment";
-import * as uuid from "uuid";
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
 
