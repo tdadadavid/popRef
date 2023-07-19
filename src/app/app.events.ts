@@ -40,4 +40,3 @@ class AppEventManager extends Event {
 
 const { dispatch } = new AppEventManager(register);
 export { dispatch }
-dispatch("")
