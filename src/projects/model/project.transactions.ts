@@ -78,12 +78,13 @@ ProjectTransactions.init(
         },
         created_at: {
             type: DataTypes.DATE,
-            defaultValue: moment().toDate(),
+            defaultValue: DataTypes.DATE,
         },
     },
     {
         sequelize,
         timestamps: true,
+        tableName: 'project_transactions',
         modelName: 'project_transactions',
     }
 )

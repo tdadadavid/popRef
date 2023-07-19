@@ -1,7 +1,5 @@
-
 import * as moment from "moment";
-import * as uuid from "uuid";
-import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
+import { CreationOptional, DataTypes, ForeignKey, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
 import { sequelize } from "../../core";
 import { User } from "../../users";
@@ -10,18 +8,18 @@ import { Projects } from "./projects";
 export class ProjectContributions extends Model<
     InferAttributes<ProjectContributions>, InferCreationAttributes<ProjectContributions>
 >{
-    declare transaction_id: CreationOptional<string>;
-    declare project_id: CreationOptional<string>;
+    declare contribution_id: CreationOptional<string>;
+    declare project_id: ForeignKey<string>;
     declare amount: number;
     declare percentage_contribution: number;
     declare current_cutribution: number;
-    declare contributor_id: CreationOptional<string>;
-    declare created_at: CreationOptional<Date | null>;
+    declare contributor_id: ForeignKey<User['id']>;
+    declare created_at?: CreationOptional<Date>;
 }
 
 ProjectContributions.init(
     {
-        transaction_id: {
+        contribution_id: {
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
@@ -56,14 +54,11 @@ ProjectContributions.init(
                 key: 'id',
             },
         },
-        created_at: {
-            type: DataTypes.DATE,
-            defaultValue: moment().toDate(),
-        },
     },
     {
         sequelize,
         timestamps: true,
+        tableName: 'project_contributions',
         modelName: 'project_contributions',
     }
 )

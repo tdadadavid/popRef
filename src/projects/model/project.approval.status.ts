@@ -1,5 +1,3 @@
-import * as moment from "moment";
-import * as uuid from "uuid";
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
 import { sequelize } from "../../core";
@@ -12,6 +10,7 @@ export class ProjectApprovalStatus extends Model<
     declare name: string;
     declare description: string;
     declare created_at?: CreationOptional<Date>;
+    declare updated_at?: CreationOptional<Date>;
 }
 
 ProjectApprovalStatus.init(
@@ -37,7 +36,8 @@ ProjectApprovalStatus.init(
     },
     {
         sequelize,
-        timestamps: true,
+        freezeTableName: true,
+        tableName: 'project_approval_status',
         modelName: 'project_approval_status',
     }
 )

@@ -1,5 +1,4 @@
-import { ForeignKey, UUIDV4, CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
-import * as uuid from "uuid";
+import { ForeignKey, CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from "sequelize";
 
 import { sequelize } from "../../core";
 import { ProjectApprovalStatus } from "./project.approval.status";
@@ -15,11 +14,11 @@ export class Projects extends Model<
     declare estimated_amount: number;
     declare contribution_percentage: number;
     declare current_contribution: number;
-    declare approval_status: ForeignKey<string>;
-    declare artist: ForeignKey<string>
+    declare approval_status: ForeignKey<ProjectApprovalStatus['status_id']>;
+    declare artist: ForeignKey<User['id']>
     declare still_accepts_contribution: boolean;
-    declare approved_at?: CreationOptional<Date | null>;
-    declare rejected_at?: CreationOptional<Date | null>;
+    declare approved_at?: CreationOptional<Date>;
+    declare rejected_at?: CreationOptional<Date>;
     declare created_at?: CreationOptional<Date>;
     declare deleted_at?: CreationOptional<Date>;
 
@@ -40,6 +39,7 @@ Projects.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
         },
         description: {
             type: DataTypes.STRING,
@@ -49,16 +49,16 @@ Projects.init(
             }
         },
         estimated_amount: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         contribution_percentage: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0,
         },
         current_contribution: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.TINYINT,
             allowNull: true,
             defaultValue: 0,
         },
@@ -79,11 +79,12 @@ Projects.init(
         still_accepts_contribution: {
             type: DataTypes.BOOLEAN,
             defaultValue: true,
-        },
+        }
     },
     {   
         sequelize,
         timestamps: true,
-        modelName: 'project',
+        tableName: 'projects',
+        modelName: 'projects',
     }
 )
