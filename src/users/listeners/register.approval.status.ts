@@ -18,10 +18,7 @@ class RegisterDefaultApprovalStatus {
             }
         });
 
-        console.log(theyHaveBeenRegistered);
-
         if (theyHaveBeenRegistered.length !== 0) {
-            console.log("here created");
             logger.info("Default approval status has been previously registered");
             return
         };

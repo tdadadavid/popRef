@@ -14,10 +14,7 @@ class RegisterDefaultUserTypes {
             }
         });
 
-        console.log(theyHaveBeenRegistered);
-
         if (theyHaveBeenRegistered.length !== 0) {
-            console.log("here types created")
             logger.info("Default user roles has been previously registered");
             return
         };
