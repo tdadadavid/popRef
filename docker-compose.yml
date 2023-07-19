@@ -5,8 +5,47 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: "popRefAPI"
+    environment:
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: rootpassword
+      DATABASE_NAME: poprev
+      DATABASE_HOST: 127.0.0.1
+      DATABASE_PORT: 5432
+      ACCESS_TOKEN_SECRET: ''
+      ACCESS_TOKEN_SECRET_LIFE_SPAN: 100
+      REFRESH_TOKEN_SECRET: ''
+      REFRESH_TOKEN_SECRET_LIFE_SPAN: 1000
     ports:
       - "4000:4000"
     restart: "always"
     volumes:
-      - './app:node_modules'
+      - 'appCache/app:node_modules'
+    depends_on:
+      - db
+      - cache
+  
+  db: 
+    image: postgres
+    container_name: pop_rev_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: rootpassword
+      POSTGRES_USER: "postgres"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  
+  cache: 
+    image: redis:6.2-alpine
+    container_name: pop_rev_cache
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - cache:/data
+  
+volumes:
+  cache:
+    driver: local
+  pgdata:
