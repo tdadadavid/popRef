@@ -12,9 +12,9 @@ export class UserProjects extends Model<
     InferAttributes<UserProjects>, InferCreationAttributes<UserProjects>
 >{
     declare user_project_id: CreationOptional<string>;
-    declare project_id: ForeignKey<Projects>;
-    declare user_id: ForeignKey<User>
-    declare created_at: CreationOptional<Date | null>;
+    declare project_id: ForeignKey<string>;
+    declare user_id: ForeignKey<string>
+    declare created_at?: CreationOptional<Date>;
 }
 
 UserProjects.init(
@@ -23,10 +23,10 @@ UserProjects.init(
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
-            defaultValue: UUID(),
+            defaultValue: DataTypes.UUID,
         },
         project_id: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             references: {
                 model: Projects,
                 key: 'project_id',
@@ -39,15 +39,11 @@ UserProjects.init(
                 key: 'id',
             }
         },
-        created_at: {
-            type: DataTypes.DATE,
-            defaultValue: moment().toDate(),
-            
-        },
     },
     {
         sequelize,
         timestamps: true,
-        freezeTableName: true,
+        tableName: 'user_projects',
+        modelName: 'user_projects'
     }
 )

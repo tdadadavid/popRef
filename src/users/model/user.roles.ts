@@ -1,17 +1,13 @@
-
-import * as moment from "moment";
 import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from "sequelize";
 
-
 import { sequelize } from "../../core";
-
-
 export class UserRoles extends Model<
     InferAttributes<UserRoles>, InferCreationAttributes<UserRoles>
 >{
     declare role_id: CreationOptional<string>;
     declare name: string;
-    declare created_at?: CreationOptional<Date>;
+    declare createdAt?: CreationOptional<Date>;
+    declare updatedAt?: CreationOptional<Date>;
 }
 
 UserRoles.init(
@@ -31,6 +27,7 @@ UserRoles.init(
     {
         sequelize,
         timestamps: true,
+        tableName: 'user_roles',
         modelName: 'user_roles',
     }
 )

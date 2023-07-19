@@ -5,11 +5,12 @@ import { makeContribution, viewRoles } from "../serivices"
 import { makeContributionSchema } from "../../validation";
 import { userRolesRouter } from "./user.roles.router";
 import { currentUser } from "../../../auth/services/current.user";
+import { artistRouter } from "src/users/artists";
 
 export const userRouter = Router();
 
 // userRouter.use("/admins", adminRouter);
-// userRouter.use("/artists", artistRouter);
+userRouter.use("/artists", artistRouter);
 
 userRouter.use("/roles", userRolesRouter);
 

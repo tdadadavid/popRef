@@ -17,12 +17,12 @@ export class User extends Model<
     declare id: CreationOptional<string>;
     declare firstname: string;
     declare lastname: string;
-    declare othername: CreationOptional<string | null>;
+    declare othername: CreationOptional<string>;
     declare email: string;
-    declare role: ForeignKey<string>
-    declare password?: CreationOptional<string>;
+    declare role: ForeignKey<UserRoles['role_id']>
+    declare password?: CreationOptional<string| null>;
     declare createdAt?: CreationOptional<Date>;
-    declare deleted?: CreationOptional<Date>;
+    declare updatedAt?: CreationOptional<Date>;
 
     fullName = () => `${this.firstname} ${this.lastname} ${this.othername.charAt(0).toUpperCase()}`;
 }
@@ -69,27 +69,21 @@ User.init(
             attributes: {
                 exclude: [
                     'password',
-                    'verifyToken',
-                    'verifyTokenExpiresIn',
-                    'resetToken',
-                    'resetTokenExpiresIn'
                 ]
             }
         },
         scopes: {
             withPassword: {
                 attributes: {
-                    exclude: [
-                        'verifyToken',
-                        'verifyTokenExpiresIn',
-                        'resetToken',
-                        'resetTokenExpiresIn'
+                    include: [
+                        'password'
                     ]
                 }
             },
         },
         modelName: 'users',
         sequelize,
+        tableName: 'users',
         timestamps: true,
     },
 );
