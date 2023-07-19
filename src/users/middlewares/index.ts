@@ -1,1 +1,1 @@
-export * from "./is.artisit";
+export * from "./is";
