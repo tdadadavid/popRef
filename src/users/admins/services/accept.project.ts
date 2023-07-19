@@ -61,7 +61,7 @@ export class DecideOnProposal {
             ? projectAcceptedOptions.accepted_at = project.approved_at.toLocaleDateString()
             : projectAcceptedOptions.rejected_at = project.rejected_at.toLocaleDateString()
 
-        dispatch("project:proposal:accepted", projectAcceptedOptions);
+        dispatch("project:proposal:decision", projectAcceptedOptions);
 
         return {
             code: HttpStatus.OK,
