@@ -1,4 +1,4 @@
-import { ControllerArgs, HttpStatus } from "src/core";
+import { ControllerArgs, HttpStatus } from "../../core";
 import { DefaultApprovalStatus, ProjectApprovalStatus, Projects } from "../model";
 
 
@@ -22,28 +22,28 @@ export class SeeProjects {
             }
         });
 
-        const proposalsAndCount = await this.dbProjects.findAndCountAll({
+        const acceptedProposalsAndCount = await this.dbProjects.findAndCountAll({
             where: {
                approval_status: acceptedApprovalStatus.status_id
             },
-            order: [
-                [sortBy, 'ASC'],
-            ],
             limit,
             offset,
         });
 
-        const totalCount = proposalsAndCount.count;
+        console.log(acceptedProposalsAndCount);
+
+        //@ts-ignore
+        const totalCount = acceptedProposalsAndCount.count;
       
           // Calculate the total number of pages based on the total count and limit.
           const totalPages = Math.ceil(totalCount / limit);
       
-          // You can return the proposals, totalCount, and totalPages to the frontend or handle them as needed.
           return {
             code: HttpStatus.OK,
-            message: 'Pending project proposals',
+            message: 'All projects(tokens)',
             data: {
-                proposals: proposalsAndCount.rows
+                //@ts-ignore
+                tokens: acceptedProposalsAndCount.rows
             },
             meta: {
                 totalCount,
