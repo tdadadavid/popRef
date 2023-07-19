@@ -1,5 +1,5 @@
-import { ConflictError, ControllerArgs, HttpStatus, hashData } from "src/core";
-import { User, UserRoles } from "src/users";
+import { ConflictError, ControllerArgs, HttpStatus, hashData } from "../../core";
+import { User, UserRoles } from "../../users";
 
 
 export class SignUp {
@@ -11,14 +11,15 @@ export class SignUp {
     signUp = async ({ input }: ControllerArgs) => {
         const { email,password, role} =  input;
 
-        const userExists = await this.dbUser.findOne({ where: { email } });
-        if(userExists) throw new ConflictError("Admin with email already exists");
 
         const userRole = await this.dbRoles.findOne({ where: { role_id: role } });
-        if(userRole) throw new ConflictError("Role not recognized");
+        if(!userRole) throw new ConflictError("Role not recognized");
+
+        const userExists = await this.dbUser.findOne({ where: { email }});
+        if(userExists) throw new ConflictError(`${userRole.name} with email already exists`);
 
         const hashPassword = await hashData(password);
-        const data = {password: hashPassword, role: userRole.role_id, ...input};
+        const data = {...input, password: hashPassword, role: userRole.role_id};
 
         const user = await this.dbUser.create(data);
 

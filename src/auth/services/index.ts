@@ -1,8 +1,15 @@
+import { User, UserRoles } from "../../users";
 import { CurrentUser } from "./current.user";
 import { SignIn } from "./signIn.user";
 import { SignUp } from "./signup.user";
 
 
-export const signIn = new SignIn("Users" as any);
-export const currentUser = new CurrentUser();
-// export const signUp = new SignUp("Users" as any);
+const signIn = new SignIn(User);
+const currentUser = new CurrentUser();
+const signUp = new SignUp(User, UserRoles);
+
+export {
+    signIn,
+    signUp,
+    currentUser
+}

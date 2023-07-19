@@ -1,4 +1,4 @@
-import moment from "moment";
+import * as moment from "moment";
 
 import { ControllerArgs, HttpStatus, UnAuthorizedError, compareHashedData, computeExpiryDate, config, generateToken } from "../../core";
 import { User } from "../../users";
@@ -16,20 +16,22 @@ export class SignIn {
             .findOne({ where: { email } }))?.toJSON();
         if (!user) throw new UnAuthorizedError('Invalid login credentials');
 
-        if(!user.isVerified) throw new UnAuthorizedError("User is unverified");
-
         const isValid = await compareHashedData(password, user.password!);
         if (!isValid) throw new UnAuthorizedError('Invalid login credentials');
 
+        const now = Date.now();
+        const accessTokenExpiresIn = moment(now).add(parseInt(config.auth.accessTokenExpiresIn), 'minutes');
         const accessToken = generateToken(
             { id: user.id, role: user.role },
             config.auth.accessTokenSecret,
-            config.auth.accessTokenExpiresIn
+            accessTokenExpiresIn.unix().toString()
         );
+        
+        const refreshTokenExpiresIn = moment(now).add(parseInt(config.auth.refreshTokenExpiresIn), 'hours')
         const refreshToken = generateToken(
             { id: user.id, role: user.role },
             config.auth.refreshTokenSecret,
-            config.auth.refreshTokenExpiresIn
+            refreshTokenExpiresIn.unix().toString()
         );
 
         delete user.password;
@@ -42,11 +44,9 @@ export class SignIn {
                 user,
                 tokens: {
                     accessToken,
-                    accessTokenExpiresIn:
-                        moment(computeExpiryDate(parseInt(config.auth.accessTokenExpiresIn))).toLocaleString(),
+                    accessTokenExpiresIn: accessTokenExpiresIn.toString(),
                     refreshToken,
-                    refreshTokenExpiresIn:
-                        moment(computeExpiryDate(parseInt(config.auth.refreshTokenExpiresIn))).toLocaleString()
+                    refreshTokenExpiresIn: refreshTokenExpiresIn.toString(),
                 }
             },
         }

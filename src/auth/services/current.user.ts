@@ -25,3 +25,5 @@ export class CurrentUser {
         next();
     }
 }
+
+export const currentUser = new CurrentUser();
