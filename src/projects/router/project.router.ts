@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { controllerHandler } from "../../core";
+import { controllerHandler } from "../../core/middlewares";
+import { seeProjects } from "../services";
 
 export const projectRouter = Router();
 
-// projectRouter
-//     .get('/projects', controllerHandler.handle)
+projectRouter
+    .get('/', controllerHandler.handle(seeProjects.see))
