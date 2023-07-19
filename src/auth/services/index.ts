@@ -4,7 +4,7 @@ import { SignIn } from "./signIn.user";
 import { SignUp } from "./signup.user";
 
 
-const signIn = new SignIn(User);
+const signIn = new SignIn(User, UserRoles);
 const currentUser = new CurrentUser();
 const signUp = new SignUp(User, UserRoles);
 

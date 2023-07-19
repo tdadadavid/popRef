@@ -10,7 +10,8 @@
     "start": "nodemon dist/main",
     "dev": "npm run db:migrate && nodemon dist/main",
     "make:migration:file": "sequelize migration:generate --name",
-    "db:migrate": "npx sequelize-cli db:migrate"
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "test": "jest"
   },
   "author": "king",
   "license": "ISC",
