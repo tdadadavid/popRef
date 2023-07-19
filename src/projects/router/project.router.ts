@@ -5,5 +5,5 @@ import { seeProjectTxn, seeProjects } from "../services";
 export const projectRouter = Router();
 
 projectRouter
-    .get('/', controllerHandler.handle(seeProjects.see))
+    .get('/', controllerHandler.handle(seeProjects.see))//T
     .get('/:token_id/transactions', controllerHandler.handle(seeProjectTxn.see))
